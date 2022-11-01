@@ -16,12 +16,16 @@ app.get('/dashboard', function (req, res) {
   res.render('dashboard');
 });
 
-app.get('*', function (req, res) {
-  res.sendFile(__dirname + '/public/404.html');
+app.get('/catalogo', function (req, res) {
+  res.render('catalogo');
 });
 
-app.get('/about', function (req, res) {
-    res.send('About page');
+app.get('/listaproductos', function (req, res) {
+  res.render('lis-products');
+});
+
+app.get('*', function (req, res) {
+  res.render('404');
 });
 
 app.listen(3000);
