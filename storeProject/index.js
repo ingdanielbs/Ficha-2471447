@@ -21,7 +21,7 @@ app.get('/catalogo', function (req, res) {
 });
 
 app.get('/listaproductos', function (req, res) {
-  res.render('lis-products');
+  res.render('list-product');
 });
 
 app.get('*', function (req, res) {
