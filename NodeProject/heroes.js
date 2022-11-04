@@ -17,7 +17,18 @@ const getHeroe = (id, callback) => {
     callback(heroes[id]);
 }
 
+const getHeroePromise = (id) => {
+    return new Promise((resolve, reject) => {
+        if (heroes[id]){
+            resolve(heroes[id]);
+        }else{
+            reject('No existe el heroe');
+        }
+    });
+}
+
 module.exports = {
     getHeroe,
-    heroes
+    heroes,
+    getHeroePromise,
 }

@@ -17,7 +17,13 @@ notas = {
 
 const app = http.createServer((request, response) => {
   response.writeHead(200, { 'Content-Type': 'application/json' });
-  response.end(JSON.stringify(notas));
+  /* response.end(JSON.stringify(notas)); */
+    if (request.url ==='/')
+        response.end("Home page");
+    else if (request.url ==='/notas')
+        response.end(JSON.stringify(notas)); 
+    else if (request.url === "/about")
+        response.end("About page");
 });
 
 const PORT = 3001
