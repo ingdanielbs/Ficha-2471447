@@ -1,4 +1,4 @@
-usuarios = [
+let usuarios = [
     {
         id: 1,
         nombre: "Juan",
@@ -14,3 +14,5 @@ usuarios = [
         estado: true
     }   
 ];
+
+module.exports = usuarios;
