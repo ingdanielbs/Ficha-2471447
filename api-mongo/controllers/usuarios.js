@@ -5,8 +5,8 @@ const Usuario = require('../models/usuario');
 
 const usuariosPost = async (req, res) => {
     const errors = validationResult(req);
-    if (!errors.isEmpty){
-        return res.status(400).json({errors});
+    if (!errors.isEmpty()) {
+        return res.status(400).json(errors);
     }
 
     const { nombre, correo, password, rol} = req.body;
