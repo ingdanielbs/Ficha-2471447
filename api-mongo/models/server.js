@@ -20,4 +20,12 @@ class Usuarios{
     routes(){
         this.app.use(this.usuariosPATH, require('../routes/usuarios') ); 
     }
+
+    listen(){
+        this.app.listen (this.port, ()=>{
+            console.log(`Corriendo en el puerto ${this.port}`)
+        })
+    }
 }
+
+module.exports = Usuarios;
