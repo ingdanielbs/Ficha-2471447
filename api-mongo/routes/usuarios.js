@@ -1,7 +1,7 @@
 const {Router} = require('express');
 const {check} = require('express-validator');
 
-const {usuariosPost, usuariosGet, usuarioGet} = require('../controllers/usuarios');
+const {usuariosPost, usuariosGet, usuarioGet, usuariosPut, usuariosDelete} = require('../controllers/usuarios');
 
 const router = Router();
 
@@ -14,6 +14,8 @@ router.post('/', [
 
 router.get('/', usuariosGet);
 router.get('/:id', usuarioGet);
+router.put('/:id', usuariosPut);
+router.delete('/:id', usuariosDelete);
 
 
 module.exports = router;

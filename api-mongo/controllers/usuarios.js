@@ -40,8 +40,7 @@ const usuarioGet = async (req, res) => {
 
     const {id} = req.params;    
     const usuario = await Usuario.findById(id);
-    !usuario ? res.json({msg: "Usuario no encontrado"}) : res.json({msg: "Información del usario", usuario});
-    
+    !usuario ? res.json({msg: "Usuario no encontrado"}) : res.json({msg: "Información del usuario", usuario});    
     /* if(!usuario){
         return res.json({msg: "Usuario no encontrado"});
     }
@@ -52,4 +51,29 @@ const usuarioGet = async (req, res) => {
 
 }
 
-module.exports = {usuariosPost, usuariosGet, usuarioGet}
+const usuariosPut = async (req, res) => {
+
+    const {id} = req.params;    
+    const usuario = await Usuario.findById(id);
+    const {_id, google, correo, ... resto} = req.body;
+    if (resto.password) {
+        const salt = bcryptjs.genSaltSync();
+        usuario.password = bcryptjs.hashSync(resto.password, salt);
+    }
+    const usuarioActualizado = await Usuario.findByIdAndUpdate(id, resto);
+
+    res.json({msg: "Usuario actualizado", usuario});      
+
+}
+
+const usuariosDelete = async (req, res) => {
+
+    const {id} = req.params;    
+    /* const usuario = await Usuario.findByIdAndDelete(id); */
+    const usuario = await Usuario.findByIdAndUpdate(id, {estado: false});
+
+    res.json({msg: "Usuario eliminado"});
+
+}
+
+module.exports = {usuariosPost, usuariosGet, usuarioGet, usuariosPut, usuariosDelete};
