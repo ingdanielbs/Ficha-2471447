@@ -26,4 +26,30 @@ const usuariosPost = async (req, res) => {
 
 }
 
-module.exports = {usuariosPost}
+const usuariosGet = async (req, res) => {
+    const usuarios = await Usuario.find();
+
+    res.json({
+        msg: "Lista de usuarios",
+        usuarios
+    });
+
+}
+
+const usuarioGet = async (req, res) => {
+
+    const {id} = req.params;    
+    const usuario = await Usuario.findById(id);
+    !usuario ? res.json({msg: "Usuario no encontrado"}) : res.json({msg: "Información del usario", usuario});
+    
+    /* if(!usuario){
+        return res.json({msg: "Usuario no encontrado"});
+    }
+    res.json({
+        msg: "Información del usuario",
+        usuario
+    }); */
+
+}
+
+module.exports = {usuariosPost, usuariosGet, usuarioGet}
