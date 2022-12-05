@@ -7,6 +7,7 @@ class Usuarios{
         this.app = express();
         this.port = process.env.PORT;
         this.usuariosPATH = '/api/usuarios';
+        this.authPATH = '/api/auth';
         this.conectarDB();
         this.middlewares();
         this.routes();
@@ -18,7 +19,8 @@ class Usuarios{
         this.app.use(express.json());
     }
     routes(){
-        this.app.use(this.usuariosPATH, require('../routes/usuarios') ); 
+        this.app.use(this.usuariosPATH, require('../routes/usuarios') );
+        this.app.use(this.authPATH, require('../routes/auth') ); 
     }
 
     listen(){
