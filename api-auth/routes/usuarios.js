@@ -2,6 +2,8 @@ const {Router} = require('express');
 const {check} = require('express-validator');
 
 const {usuariosPost, usuariosGet, usuarioGet, usuariosPut, usuariosDelete} = require('../controllers/usuarios');
+const validarJWT = require('../middlewares/validar-jwt');
+const { esAdminRole } = require('../middlewares/validar-roles');
 
 const router = Router();
 
@@ -12,10 +14,10 @@ router.post('/', [
     check('rol', 'el rol es obligatorio').isIn(['ADMIN_ROLE', 'USER_ROLE'])
 ], usuariosPost);
 
-router.get('/', usuariosGet);
-router.get('/:id', usuarioGet);
-router.put('/:id', usuariosPut);
-router.delete('/:id', usuariosDelete);
+router.get('/', [validarJWT], usuariosGet);
+router.get('/:id', [validarJWT], usuarioGet);
+router.put('/:id', [validarJWT], usuariosPut);
+router.delete('/:id',[validarJWT, esAdminRole], usuariosDelete);
 
 
 module.exports = router;

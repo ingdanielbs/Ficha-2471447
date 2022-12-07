@@ -2,6 +2,7 @@ const express = require('express');
 const bcryptjs = require('bcryptjs');
 const {validationResult} = require('express-validator');
 const Usuario = require('../models/usuario');
+const { generarJWT } = require('../helpers/generar-jwt');
 
 const login = async (req, res) => {
     const errors = validationResult(req);
@@ -31,9 +32,10 @@ const login = async (req, res) => {
             });
         }
 
-        res.json({msg: "Usuario logueado"});
+        const token = await generarJWT(usuario.id);
+        res.json({msg: "Usuario logueado", usuario, token});
     } catch (error) {
-        
+        return res.status(500).json({msg: "Existe un error"});
     }
 
 }
